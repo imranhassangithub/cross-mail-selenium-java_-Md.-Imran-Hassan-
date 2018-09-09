@@ -44,6 +44,7 @@ public class GmailEmailCheckTest extends TestCase {
 
 		gmailpageobject.clickEmailSubject("Test Gmail");
 		gmailpageobject.clickEmailBody("Gmail Test");
+		gmailpageobject.clickEmailName("me");
 
 	}
 

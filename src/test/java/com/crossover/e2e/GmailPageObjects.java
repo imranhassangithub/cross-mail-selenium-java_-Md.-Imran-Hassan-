@@ -23,6 +23,9 @@ public class GmailPageObjects {
 	@FindBy(how = How.XPATH, xpath = "//span[@class='y2']")
 	List<WebElement> emailBodyThreads;
 
+	@FindBy(how = How.XPATH, xpath = "//span[@class='zF']")
+	List<WebElement> emailnameThreads;
+
 	@FindBy(how = How.XPATH, xpath = "//span[@class='gb_bb gbii']")
 	WebElement profileLogo;
 
@@ -52,7 +55,7 @@ public class GmailPageObjects {
 
 			if (emailThreads.get(i).getText().contains(emailSubject)) {
 				emailThreads.get(i).click();
-				System.out.println("email Subject clicked");
+				System.out.println("email Subject clicked and Verified");
 				break;
 			}
 		}
@@ -65,7 +68,20 @@ public class GmailPageObjects {
 
 			if (emailBodyThreads.get(i).getText().contains(emailBody)) {
 				emailBodyThreads.get(i).click();
-				System.out.println("email Body clicked");
+				System.out.println("email Body clicked and Verified");
+				break;
+			}
+		}
+	}
+
+	public void clickEmailName(String emailName) {
+		waitForVisible(driver, profileLogo);
+
+		for (int i = 0; i < emailnameThreads.size(); i++) {
+
+			if (emailnameThreads.get(i).getText().contains(emailName)) {
+				emailnameThreads.get(i).click();
+				System.out.println("email Name clicked and Verified");
 				break;
 			}
 		}
