@@ -43,6 +43,7 @@ public class GmailEmailCheckTest extends TestCase {
 		Thread.sleep(1000);
 
 		gmailpageobject.clickEmailSubject("Test Gmail");
+		gmailpageobject.clickEmailBody("Gmail Test");
 
 	}
 

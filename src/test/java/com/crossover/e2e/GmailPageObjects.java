@@ -20,6 +20,9 @@ public class GmailPageObjects {
 	@FindBy(how = How.XPATH, xpath = "//span[@class='bog']")
 	List<WebElement> emailThreads;
 
+	@FindBy(how = How.XPATH, xpath = "//span[@class='y2']")
+	List<WebElement> emailBodyThreads;
+
 	@FindBy(how = How.XPATH, xpath = "//span[@class='gb_bb gbii']")
 	WebElement profileLogo;
 
@@ -50,6 +53,19 @@ public class GmailPageObjects {
 			if (emailThreads.get(i).getText().contains(emailSubject)) {
 				emailThreads.get(i).click();
 				System.out.println("email Subject clicked");
+				break;
+			}
+		}
+	}
+
+	public void clickEmailBody(String emailBody) {
+		waitForVisible(driver, profileLogo);
+
+		for (int i = 0; i < emailBodyThreads.size(); i++) {
+
+			if (emailBodyThreads.get(i).getText().contains(emailBody)) {
+				emailBodyThreads.get(i).click();
+				System.out.println("email Body clicked");
 				break;
 			}
 		}
