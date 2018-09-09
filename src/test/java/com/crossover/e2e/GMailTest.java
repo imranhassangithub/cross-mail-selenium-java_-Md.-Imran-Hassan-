@@ -26,10 +26,6 @@ public class GMailTest extends TestCase {
 		properties.load(new FileReader(new File("test.properties")));
 	}
 
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
-
 	@Test
 	public void testSendEmail() throws Exception {
 		driver.get("https://mail.google.com/");
@@ -52,23 +48,18 @@ public class GMailTest extends TestCase {
 				"/html[1]/body[1]/div[7]/div[3]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]"));
 		composeElement.click();
 
-		Thread.sleep(1000);
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("to")));
 
 		// Type on To
 		driver.findElement(By.name("to")).clear();
 		driver.findElement(By.name("to"))
 				.sendKeys(String.format("%s@gmail.com", properties.getProperty("username")) + Keys.ENTER);
 
-		// Write Subject
+		GmailPageObjects gmailpageobject = new GmailPageObjects(driver);
 
-		driver.findElement(By.xpath("//*[@id=\":8e\"]")).clear();
-		driver.findElement(By.xpath("//*[@id=\":8e\"]")).sendKeys("Test Gmail");
+		gmailpageobject.enterEmailSubject("Test Gmail");
+		gmailpageobject.enterEmailBody("Gmail Test");
 
-		// Write Body
-		driver.findElement(By.xpath("//*[@id=\":9j\"]")).click();
-		driver.findElement(By.xpath("//*[@id=\":9j\"]")).sendKeys("Gmail Test");
-
-		// Send Email
 		driver.findElement(By.xpath("//*[@role='button' and text()='Send']")).click();
 
 	}

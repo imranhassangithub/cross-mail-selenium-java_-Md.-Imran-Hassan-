@@ -24,10 +24,6 @@ public class GmailEmailCheckTest extends TestCase {
 		properties.load(new FileReader(new File("test.properties")));
 	}
 
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
-
 	@Test
 	public void testReadEmail() throws Exception {
 		driver.get("https://mail.google.com/");
@@ -47,8 +43,6 @@ public class GmailEmailCheckTest extends TestCase {
 		Thread.sleep(1000);
 
 		gmailpageobject.clickEmailSubject("Test Gmail");
-		gmailpageobject.clickEmailBody("Gmail Test");
-		gmailpageobject.clickEmailName("Imran Hassan");
 
 	}
 

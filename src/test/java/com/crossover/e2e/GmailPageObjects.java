@@ -2,6 +2,7 @@ package com.crossover.e2e;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,32 +12,34 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class GmailPageObjects {
 
+	WebDriver driver;
+
+	By mailSubject = By.xpath("//*[@id=\":8e\"]");
+	By mailbody = By.xpath("//*[@id=\":9j\"]");
+
 	@FindBy(how = How.XPATH, xpath = "//span[@class='bog']")
 	List<WebElement> emailThreads;
 
 	@FindBy(how = How.XPATH, xpath = "//span[@class='gb_bb gbii']")
 	WebElement profileLogo;
 
-	@FindBy(how = How.XPATH, xpath = "//span[@class='yP']")
-	List<WebElement> emailname;
-
-	private WebDriver driver;
-
 	public GmailPageObjects(WebDriver driver) {
 		this.driver = driver;
 	}
 
-	public void clickEmailName(String emailName) {
-		waitForVisible(driver, profileLogo);
+	public void enterEmailSubject(String mailsub) {
+		driver.findElement(mailSubject).click();
+		driver.findElement(mailSubject).sendKeys(mailsub);
 
-		for (int i = 0; i < emailname.size(); i++) {
+		System.out.println("Email Subject Entered");
+	}
 
-			if (emailname.get(i).getText().contains(emailName)) {
-				emailname.get(i).click();
-				System.out.println("email name clicked");
-				break;
-			}
-		}
+	public void enterEmailBody(String Body) {
+
+		driver.findElement(mailbody).click();
+		driver.findElement(mailbody).sendKeys(Body);
+
+		System.out.println("Email Body Entered");
 	}
 
 	public void clickEmailSubject(String emailSubject) {
@@ -47,19 +50,6 @@ public class GmailPageObjects {
 			if (emailThreads.get(i).getText().contains(emailSubject)) {
 				emailThreads.get(i).click();
 				System.out.println("email Subject clicked");
-				break;
-			}
-		}
-	}
-
-	public void clickEmailBody(String emailBody) {
-		waitForVisible(driver, profileLogo);
-
-		for (int i = 0; i < emailThreads.size(); i++) {
-
-			if (emailThreads.get(i).getText().contains(emailBody)) {
-				emailThreads.get(i).click();
-				System.out.println("email Body clicked");
 				break;
 			}
 		}
